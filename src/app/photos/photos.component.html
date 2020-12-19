@@ -1,0 +1,12 @@
+<div class='card' >
+    <app-photos></app-photos>
+    <h1>Micro-Instagram</h1>
+    <div class='card-header' *ngFor = 'let photo of photos'>
+        <h3>{{photo.title}}</h3>        
+        <a [routerLink] = "['/photos', photo.id]">
+            <img class='center-block img-responsive'  [src] = 'photo.thumbnailUrl'>
+        </a>
+    </div>
+    <router-outlet></router-outlet>
+</div>
+

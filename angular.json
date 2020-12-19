@@ -120,5 +120,8 @@
       }
     }
   },
-  "defaultProject": "Micro-Instagram"
+  "defaultProject": "Micro-Instagram",
+  "cli": {
+    "analytics": "85296070-5d57-4078-bdda-e9bd1648c988"
+  }
 }
