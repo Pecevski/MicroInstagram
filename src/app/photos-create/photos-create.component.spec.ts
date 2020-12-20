@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PhotosComponent } from './photos.component';
+import { PhotosCreateComponent } from './photos-create.component';
 
-describe('PhotosComponent', () => {
-  let component: PhotosComponent;
-  let fixture: ComponentFixture<PhotosComponent>;
+describe('PhotosCreateComponent', () => {
+  let component: PhotosCreateComponent;
+  let fixture: ComponentFixture<PhotosCreateComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PhotosComponent ]
+      declarations: [ PhotosCreateComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PhotosComponent);
+    fixture = TestBed.createComponent(PhotosCreateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,0 +1,9 @@
+<div class="card" *ngIf="photo">
+  <div class="card-header">
+    {{'Title:' + photo.title}}
+  </div>
+  <div class="card-body">
+    <p>{{'Album No.:' + photo.albumId}}</p>
+    <img class="center-block img-responsive" [src]="photo.url" />
+  </div>
+</div>
