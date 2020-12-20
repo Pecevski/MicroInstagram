@@ -2,8 +2,7 @@
   <h1>Micro-Instagram</h1>
   <p>    
     <button class="btn btn-outline-primary btn-sm"
-            [routerLink]="['/photos',  'add']">Add Photo</button>
-    <app-photos-create></app-photos-create>
+            [routerLink]="['/photos/create']">Create Photo</button>
   </p>
   <div class="card-header" *ngFor="let photo of photos">
     <h3>{{photo.title}}</h3>
