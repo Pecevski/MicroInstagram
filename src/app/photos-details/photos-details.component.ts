@@ -23,14 +23,15 @@ export class PhotosDetailsComponent implements OnInit {
     const param = this.route.snapshot.paramMap.get("id");
     if (param) {
       const id = +param;
-      this.getPhoto(id);
+      this.loadPhoto(id);
     }
   }
 
-  getPhoto(id: number): void {
-    this.photoService.getPhoto(id).subscribe({
-      next: photo => (this.photo = photo),
-      error: err => (this.errorMessage = err)
+  loadPhoto(id: number): void {
+    this.photoService.loadPhoto(id)
+      .subscribe({
+        next: photo => (this.photo = photo),
+        error: err => (this.errorMessage = err)
     });
   }
 }

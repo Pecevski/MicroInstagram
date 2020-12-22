@@ -4,7 +4,7 @@
     <button class="btn btn-outline-primary btn-sm"
             [routerLink]="['/photos/create']">Create Photo</button>
   </p>
-  <div class="card-header" *ngFor="let photo of photos">
+  <div class="card-header" *ngFor="let photo of photos | async">
     <h3>{{photo.title}}</h3>
     <a [routerLink]="['/photos', photo.id]">
       <img class="center-block img-responsive" [src]="photo.thumbnailUrl" />

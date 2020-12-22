@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder , Validators, FormControl } from '@angular/forms';
+import {Router} from '@angular/router';
+import { PhotoService } from '../photo.service';
 
 
 @Component({
@@ -11,7 +13,9 @@ export class PhotosCreateComponent implements OnInit {
   createForm: FormGroup;
   submitted = false;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder,
+              private router: Router,
+              private photoServise: PhotoService) { }
 
   ngOnInit(): void {
     this.createForm = this.formBuilder.group({
@@ -30,13 +34,13 @@ export class PhotosCreateComponent implements OnInit {
       if (this.createForm.invalid) {
           return;
       }
+      this.photoServise.createPhoto(this.createForm.value);
       console.log(this.createForm.value);
-      alert('Photo is Created!' + JSON.stringify(this.createForm.value, null, 4));
+      this.router.navigate(["/photos"]);
+      // alert('Photo is Created!' + JSON.stringify(this.createForm.value, null, 4));
   }
 
   onReset() {
-      this.submitted = false;
-      this.createForm.reset();
+    this.router.navigate(["/photos"]);
   }
-
 }

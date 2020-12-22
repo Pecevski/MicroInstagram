@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Observable } from "rxjs";
 
 import { IPhoto } from "../photo";
 import { PhotoService } from "../photo.service";
@@ -9,15 +10,12 @@ import { PhotoService } from "../photo.service";
   styleUrls: ["./photos.component.css"]
 })
 export class PhotosComponent implements OnInit {
-  photos: IPhoto[] = [];
+  photos: Observable<IPhoto[]>;
 
   constructor(private photoService: PhotoService) {}
 
-  ngOnInit(): void {
-    this.photoService.getPhotos().subscribe({
-      next: photos => {
-        this.photos = photos;
-      }
-    });
-  }
+  ngOnInit(): void {   
+        this.photos = this.photoService.photos;
+        this.photoService.loadPhotos();    
+  } 
 }

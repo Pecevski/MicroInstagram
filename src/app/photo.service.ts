@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
-import { Observable, throwError } from "rxjs";
+import { BehaviorSubject, Observable, throwError } from "rxjs";
 import { catchError, map, tap } from "rxjs/operators";
 
 import { IPhoto } from "./photo";
@@ -9,23 +9,36 @@ import { IPhoto } from "./photo";
   providedIn: "root"
 })
 export class PhotoService {
-  private photoUrl =
-    "http://jsonplaceholder.typicode.com/photos?_start=10&_limit=10";
+  private _photos = new BehaviorSubject<IPhoto[]>([]);
+  private photoUrl = "http://jsonplaceholder.typicode.com/photos?_start=10&_limit=10";
+  private dataStore:{photos: IPhoto[]} = {photos: []};
+  readonly photos = this._photos.asObservable();
 
   constructor(private http: HttpClient) {}
 
-  getPhotos(): Observable<IPhoto[]> {
-    return this.http.get<IPhoto[]>(this.photoUrl).pipe(
-      tap(data => console.log(JSON.stringify(data))),
-      catchError(this.handleError)
-    );
+  loadPhotos() {
+    if(this.dataStore.photos.length == 0){
+      this.http.get<IPhoto[]>(`${this.photoUrl}/photos`).subscribe(
+       data => { this.dataStore.photos = data;
+                 this._photos.next(Object.assign({}, this.dataStore).photos);
+       }, catchError(this.handleError));
+    }
   }
 
-  getPhoto(id: number): Observable<IPhoto | undefined> {
-    return this.getPhotos().pipe(
+  loadPhoto(id: number): Observable<IPhoto | undefined> {
+    return this.photos.pipe(
       map((photos: IPhoto[]) => photos.find(p => p.id === id))
     );
   }
+
+  createPhoto(photo: IPhoto) {
+    this.http.post<IPhoto>(`${this.photoUrl}/photos`, JSON.stringify(photo)).subscribe(data => {
+      data.id = Math.random();
+      this.dataStore.photos.unshift({...data, ...photo});
+      this._photos.next(Object.assign({}, this.dataStore).photos);
+    }, catchError(this.handleError));
+  }
+
 
   private handleError(err: HttpErrorResponse): Observable<never> {
     let errorMessage = "";
