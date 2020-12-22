@@ -18,4 +18,9 @@ export class PhotosComponent implements OnInit {
         this.photos = this.photoService.photos;
         this.photoService.loadPhotos();    
   } 
+
+  deletePhotoById(photoId: number){
+    this.photoService.deletePhoto(photoId);
+    console.log('DElete');
+  }
 }

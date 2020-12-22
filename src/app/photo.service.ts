@@ -14,6 +14,10 @@ export class PhotoService {
   private dataStore:{photos: IPhoto[]} = {photos: []};
   readonly photos = this._photos.asObservable();
 
+
+  // httpOptions = {
+  //   headers: new HttpHeaders({ 'Content-Type': '/json' })
+  // };
   constructor(private http: HttpClient) {}
 
   loadPhotos() {
@@ -37,6 +41,16 @@ export class PhotoService {
       this.dataStore.photos.unshift({...data, ...photo});
       this._photos.next(Object.assign({}, this.dataStore).photos);
     }, catchError(this.handleError));
+  }
+
+  deletePhoto(photoId: number){
+    const url = "https://jsonplaceholder.typicode.com";
+    this.http.delete(`${url}/photos/${photoId}`).subscribe(res => {
+        this.dataStore.photos.forEach((item,i) => {
+            if(item.id === photoId) {this.dataStore.photos.splice(i, 1)};
+          })
+            this._photos.next(Object.assign({}, this.dataStore).photos);
+        }, catchError(this.handleError))
   }
 
 
