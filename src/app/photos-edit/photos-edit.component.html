@@ -1,0 +1,47 @@
+<div class="card m-3">
+    <h5 class="card-header" >Edit Photo</h5>
+    <div class="card-body">
+        <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label>Photo ID</label>
+                <input type = 'text' formControlName="id" class="form-control" disabled/> 
+            </div>
+            <div class="form-group">
+                <label>Photo Title</label>
+                <input type = 'text' formControlName="title" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.title.errors }"/> 
+                <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+                    <div *ngIf="f.title.errors.required">Title is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Photo Url</label>
+                <input type="text" formControlName="url" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.url.errors }" />
+                <div *ngIf="submitted && f.url.errors" class="invalid-feedback">
+                    <div *ngIf="f.url.errors.required">Photo Url is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Photo ThumbnailURl</label>
+                <input type="text" formControlName="thumbnailUrl" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.thumbnailUrl.errors }" />
+                <div *ngIf="submitted && f.thumbnailUrl.errors" class="invalid-feedback">
+                    <div *ngIf="f.thumbnailUrl.errors.required">Thumbnail Url is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Album ID</label>
+                <input type="text" formControlName="albumId" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.albumId.errors }" />
+                <div *ngIf="submitted && f.albumId.errors" class="invalid-feedback">
+                    <div *ngIf="f.albumId.errors.required">Album ID is required</div>
+                </div>
+            </div>
+            <div class="text-center">
+                <button class="btn btn-primary mr-1">Edit</button>
+                <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder , Validators, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder , Validators } from '@angular/forms';
 import {Router} from '@angular/router';
+
 import { PhotoService } from '../photo.service';
 
 
@@ -37,7 +38,6 @@ export class PhotosCreateComponent implements OnInit {
       this.photoServise.createPhoto(this.createForm.value);
       console.log(this.createForm.value);
       this.router.navigate(["/photos"]);
-      // alert('Photo is Created!' + JSON.stringify(this.createForm.value, null, 4));
   }
 
   onReset() {
