@@ -21,10 +21,8 @@ export class PhotoService {
 
   loadPhotos() {
     console.log('POVIK');
-
       this.http.get<IPhoto[]>(`${this.photoUrl}/photos?_start=${this.start}&_limit=${this.limit}`).subscribe(
        data  => {
-                //  this.limit = limit + 10;
                  this.start += this.limit;
                  this.dataStore.photos = [...this.dataStore.photos, ...data];
                  console.log(data);
@@ -54,7 +52,6 @@ export class PhotoService {
   }
 
   editPhoto(photo: IPhoto){
-    console.log('EDIT')
     const url = "https://jsonplaceholder.typicode.com";
     this.http.put<IPhoto>(`${url}/photos/${photo.id}`, JSON.stringify(photo)).subscribe(data => {
        //console.log(data);

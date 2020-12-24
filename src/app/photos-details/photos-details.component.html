@@ -1,9 +1,9 @@
-<div class="card" *ngIf="photo">  
+<div class="card m-3" *ngIf="photo">  
   <div class="card-header">
-    {{'Title:' + photo.title}}
+   <b>{{'Title: ' + photo.title}}</b> 
   </div>
   <div class="card-body">
-    <p>{{'Album No.:' + photo.albumId}}</p>
-    <img class="center-block img-responsive" [src]="photo.url" />
+    <p class="card-text">{{'Album No.: ' + photo.albumId}}</p>
+    <img class="img-fluid" [src]="photo.url" />
   </div>
 </div>
