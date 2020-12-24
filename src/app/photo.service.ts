@@ -10,20 +10,27 @@ import { IPhoto } from "./photo";
 })
 export class PhotoService {
   private _photos = new BehaviorSubject<IPhoto[]>([]);
-  private photoUrl = "http://jsonplaceholder.typicode.com/photos?_start=10&_limit=10";
+  private photoUrl = "http://jsonplaceholder.typicode.com";
   private dataStore: { photos: IPhoto[] } = { photos: [] };
   readonly photos = this._photos.asObservable();
+  private start: number = 0;
+  private limit: number = 10;
 
 
   constructor(private http: HttpClient) {}
 
   loadPhotos() {
-    if(this.dataStore.photos.length == 0){
-      this.http.get<IPhoto[]>(`${this.photoUrl}/photos`).subscribe(
-       data => { this.dataStore.photos = data;
-                 this._photos.next(Object.assign({}, this.dataStore).photos);
+    console.log('POVIK');
+
+      this.http.get<IPhoto[]>(`${this.photoUrl}/photos?_start=${this.start}&_limit=${this.limit}`).subscribe(
+       data  => {
+                //  this.limit = limit + 10;
+                 this.start += this.limit;
+                 this.dataStore.photos = [...this.dataStore.photos, ...data];
+                 console.log(data);
+                 this._photos.next(Object.assign({}, this.dataStore).photos); 
+               console.log('KRAJ');                 
        }, catchError(this.handleError));
-    }
   }
 
   //Observable
@@ -68,6 +75,9 @@ export class PhotoService {
         }, catchError(this.handleError))
   }
 
+  getStart(){
+    return this.start;
+  }
 
   private handleError(err: HttpErrorResponse): Observable<never> {
     let errorMessage = "";

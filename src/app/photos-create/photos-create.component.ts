@@ -22,7 +22,7 @@ export class PhotosCreateComponent implements OnInit {
     this.createForm = this.formBuilder.group({
       title:['', Validators.required],
       albumId: ['', Validators.required],
-      photoUrl: ['', Validators.required],
+      url: ['', Validators.required],
       thumbnailUrl: ['', Validators.required]
     })
   }

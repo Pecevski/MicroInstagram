@@ -8,9 +8,12 @@
     <button class="delete" title="PhotoDelete" (click)="deletePhotoById(photo.id)"><b>Delete</b></button>&nbsp;
     <button class="edit" title="PhotoEdit" 
             [routerLink]="['/photos/edit', photo.id]"><b>E d i t</b></button>
-    <h3>{{photo.title}}</h3> 
+    <h5>{{photo.title}}</h5> 
     <a [routerLink]="['/photos', photo.id]">
       <img class="center-block img-responsive" [src]="photo.thumbnailUrl" />
     </a>
   </div>
+  <p>    
+    <button class="btn btn-outline-primary btn-md" (click)="loadMore()"><b>Load More</b></button>
+  </p>
 </div>
