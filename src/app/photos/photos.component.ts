@@ -10,13 +10,17 @@ import { PhotoService } from "../photo.service";
   styleUrls: ["./photos.component.css"]
 })
 export class PhotosComponent implements OnInit {
-  photos: Observable<IPhoto[]>;
+  photosObservable: Observable<IPhoto[]>;
+  photos: IPhoto[]=[];
   start: number;
 
   constructor(private photoService: PhotoService) {}
 
   ngOnInit(): void {   
-        this.photos = this.photoService.photos;
+        this.photosObservable = this.photoService.photos;
+        this.photosObservable.subscribe({
+          next: photos => this.photos = photos
+        })
         this.start = this.photoService.getStart();
         if(this.start == 0){
           this.photoService.loadPhotos();
@@ -25,6 +29,15 @@ export class PhotosComponent implements OnInit {
 
   loadMore(){
     this.photoService.loadPhotos(); 
+  }
+
+  search(value: string){
+    this.photosObservable.subscribe({
+      next: photos => {
+        this.photos = photos.filter(p => 
+          {return p.title.includes(value)})
+      }
+    })
   }
 
   deletePhotoById(photoId: number){

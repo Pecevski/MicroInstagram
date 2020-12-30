@@ -25,7 +25,7 @@ import { PhotosEditComponent } from './photos-edit/photos-edit.component';
     AppRoutingModule,
     ReactiveFormsModule
   ],
-  providers: [PhotoService],
+  // providers: [PhotoService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

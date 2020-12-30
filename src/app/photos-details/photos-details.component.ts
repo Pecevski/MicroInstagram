@@ -34,4 +34,8 @@ export class PhotosDetailsComponent implements OnInit {
         error: err => (this.errorMessage = err)
     });
   }
+
+  onBack(){
+    this.router.navigate(['/photos']);
+  }
 }

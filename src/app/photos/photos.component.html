@@ -2,9 +2,10 @@
   <h1 class="badge bg-primary text-wrap" style="font-size: 2rem;">Micro-Instagram</h1>
   <p>    
     <button class="btn btn-outline-primary btn-md"
-            [routerLink]="['/photos/create']"><b>Create Photo</b></button>
+            [routerLink]="['/photos/create']"><b>Create Photo</b></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="text" #searchInput (keyup)="search(searchInput.value)" placeholder="Search"/>
   </p>
-  <div class="card-header" *ngFor="let photo of photos | async">
+  <div class="card-header" *ngFor="let photo of photos">
     <button class="btn btn-outline-danger" title="PhotoDelete" (click)="deletePhotoById(photo.id)"><b>Delete</b></button>&nbsp;
     <button class="btn btn-outline-success" title="PhotoEdit" 
             [routerLink]="['/photos/edit', photo.id]"><b>E d i t</b></button>

@@ -6,4 +6,7 @@
     <p class="card-text">{{'Album No.: ' + photo.albumId}}</p>
     <img class="img-fluid" [src]="photo.url" />
   </div>
+  <p>
+    <button class="btn btn-secondary" (click)='onBack()'>Back</button>
+  </p>
 </div>

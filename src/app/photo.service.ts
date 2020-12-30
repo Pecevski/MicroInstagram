@@ -10,7 +10,7 @@ import { IPhoto } from "./photo";
 })
 export class PhotoService {
   private _photos = new BehaviorSubject<IPhoto[]>([]);
-  private photoUrl = "http://jsonplaceholder.typicode.com";
+  private photoUrl = "https://jsonplaceholder.typicode.com";
   private dataStore: { photos: IPhoto[] } = { photos: [] };
   readonly photos = this._photos.asObservable();
   private start: number = 0;

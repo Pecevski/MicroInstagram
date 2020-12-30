@@ -25,7 +25,7 @@ export class PhotosEditComponent implements OnInit {
     const param = this.route.snapshot.paramMap.get("id");
     if (param) {
       const id = +param;
-    this.photo = this.photoServise.loadForEdit(id);
+      this.photo = this.photoServise.loadForEdit(id);
     }
     
     this.editForm = this.formBuilder.group({
